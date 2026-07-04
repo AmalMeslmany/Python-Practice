@@ -1,41 +1,25 @@
-while True:
+import random
 
-    print("\n===== NOTES APP =====")
-    print("1. Add Note")
-    print("2. View Notes")
-    print("3. Delete All Notes")
-    print("4. Exit")
+letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+numbers = "0123456789"
+symbols = "!@#$%^&*?"
 
-    choice = input("Choose: ")
+all_characters = letters
 
-    if choice == "1":
-        note = input("Enter your note: ")
+length = int(input("Enter password length: "))
 
-        file = open("notes.txt", "a")
-        file.write(note + "\n")
-        file.close()
+include_numbers = input("Include numbers? (y/n): ")
+include_symbols = input("Include symbols? (y/n): ")
 
-        print("Note Added Successfully!")
+if include_numbers.lower() == "y":
+    all_characters += numbers
 
-    elif choice == "2":
-        file = open("notes.txt", "r")
-        notes = file.read()
-        file.close()
+if include_symbols.lower() == "y":
+    all_characters += symbols
 
-        print("\n===== YOUR NOTES =====")
-        print(notes)
+password = ""
 
-    elif choice == "3":
+for i in range(length):
+    password += random.choice(all_characters)
 
-        file = open("notes.txt", "w")
-        file.close()
-
-        print("All Notes Deleted!")
-
-    elif choice == "4":
-
-        print("Goodbye!")
-        break
-
-else:
-        print("Invalid Choice!")
+print("\nGenerated Password:", password)
